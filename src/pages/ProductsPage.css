@@ -1,0 +1,287 @@
+/* 基础样式 */
+.products-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.content {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 标题区域 */
+.products-header {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.products-header .ant-typography {
+  margin: 0;
+}
+
+/* 主要布局 */
+.main-layout {
+  display: flex;
+  gap: 24px;
+  min-height: calc(100vh - 180px);
+}
+
+/* 过滤侧边栏 */
+.filter-sidebar {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  width: 300px;
+  height: fit-content;
+  flex-shrink: 0;
+  position: sticky;
+  top: 24px;
+}
+
+.filter-section {
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filter-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-section .ant-typography {
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #262626;
+  font-size: 16px;
+}
+
+.filter-section .ant-select {
+  margin-bottom: 8px;
+}
+
+.filter-section .ant-slider {
+  margin: 12px 0;
+}
+
+.price-range-text {
+  margin-top: 12px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+/* 商品容器 */
+.products-container {
+  flex: 1;
+  min-width: 0; /* 防止flex子元素溢出 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 商品工具栏 */
+.products-toolbar {
+  background: #fff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 商品网格 */
+.products-grid {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  flex: 1;
+}
+
+.products-grid .ant-row {
+  margin: 0;
+}
+
+.products-grid .ant-col {
+  padding: 0 8px;
+  margin-bottom: 16px;
+}
+
+/* 无商品提示 */
+.no-products {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  font-size: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .content {
+    padding: 20px;
+    max-width: 1200px;
+  }
+  
+  .filter-sidebar {
+    width: 280px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .filter-sidebar {
+    width: 260px;
+  }
+  
+  .products-grid .ant-col {
+    padding: 0 6px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 16px;
+  }
+  
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .main-layout {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .filter-sidebar {
+    width: 100%;
+    position: static;
+    max-height: 350px;
+    overflow-y: auto;
+  }
+  
+  .products-toolbar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .products-toolbar .ant-select {
+    width: 100%;
+  }
+  
+  .products-grid {
+    padding: 16px;
+  }
+  
+  .products-grid .ant-col {
+    padding: 0 4px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .content {
+    padding: 12px;
+  }
+  
+  .filter-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .filter-section .ant-typography {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  
+  .products-grid {
+    padding: 12px;
+  }
+  
+  .no-products {
+    padding: 40px 16px;
+    font-size: 14px;
+  }
+}
+
+/* 卡片网格响应式调整 */
+.products-grid .ant-row .ant-col-xs-24,
+.products-grid .ant-row .ant-col-sm-12,
+.products-grid .ant-row .ant-col-md-12,
+.products-grid .ant-row .ant-col-lg-8,
+.products-grid .ant-row .ant-col-xl-6 {
+  padding: 0 8px;
+  margin-bottom: 16px;
+}
+
+/* 滚动美化 */
+.filter-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-sidebar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.filter-sidebar::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.filter-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* 优化选择框样式 */
+.filter-section .ant-select-selector {
+  border-radius: 6px;
+  border-color: #d9d9d9;
+  transition: all 0.3s;
+}
+
+.filter-section .ant-select-selector:hover {
+  border-color: #40a9ff;
+}
+
+.filter-section .ant-select-open .ant-select-selector {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* 优化搜索框样式 */
+.filter-section .ant-input-search {
+  width: 100%;
+}
+
+.filter-section .ant-input-search .ant-input {
+  border-radius: 6px 0 0 6px;
+}
+
+.filter-section .ant-input-search-button {
+  border-radius: 0 6px 6px 0;
+}
+
+/* 优化按钮组间距 */
+.filter-section .ant-space {
+  width: 100%;
+}
+
+.filter-section .ant-space-item {
+  width: 100%;
+}

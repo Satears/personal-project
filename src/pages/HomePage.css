@@ -1,0 +1,121 @@
+.home-content {
+  padding: 0;
+  min-height: calc(100vh - 128px);
+}
+
+/* 轮播图样式 */
+.home-carousel {
+  position: relative;
+}
+
+.carousel-item {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 32px;
+  border-radius: 8px;
+  max-width: 500px;
+}
+
+/* 分类导航样式 */
+.categories-section {
+  padding: 40px 24px;
+  background-color: #fafafa;
+}
+
+.category-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-card {
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+}
+
+.category-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+/* 产品区域样式 */
+.products-section {
+  padding: 40px 24px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.view-all-link {
+  color: #1890ff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+/* 服务区域样式 */
+.services-section {
+  padding: 40px 24px;
+  background-color: #f0f2f5;
+}
+
+.service-card {
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .carousel-item {
+    height: 200px;
+  }
+  
+  .carousel-content {
+    left: 5%;
+    right: 5%;
+    padding: 16px;
+    max-width: none;
+  }
+  
+  .categories-section,
+  .products-section,
+  .services-section {
+    padding: 20px 16px;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

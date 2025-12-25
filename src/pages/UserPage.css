@@ -1,0 +1,90 @@
+.user-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 80vh;
+  padding: 20px;
+  background-color: #f0f2f5;
+}
+
+.user-card {
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.no-user-title {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.login-button {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  background-color: #fafafa;
+}
+
+.user-avatar {
+  margin-right: 24px;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-details {
+  padding: 24px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.detail-icon {
+  margin-right: 12px;
+  color: #1890ff;
+}
+
+.user-actions {
+  padding: 0 24px 24px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.action-button {
+  min-width: 120px;
+}
+
+/* 适配小屏幕 */
+@media (max-width: 768px) {
+  .user-card {
+    margin: 0 16px;
+  }
+  
+  .user-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .user-avatar {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+  
+  .user-actions {
+    flex-direction: column;
+  }
+}

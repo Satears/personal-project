@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户反馈 - 电商系统</title>
+  <link href="https://cdn.jsdelivr.net/npm/antd@5.12.8/dist/reset.css" rel="stylesheet">
+  <style>
+    /* 全局样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+    
+    /* 头部样式 */
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .header p {
+      opacity: 0.9;
+      font-size: 16px;
+    }
+    
+    /* 表单容器 */
+    .form-container {
+      padding: 30px;
+    }
+    
+    /* 表单组样式 */
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+      font-size: 16px;
+    }
+    
+    .form-group small {
+      display: block;
+      margin-top: 5px;
+      color: #8c8c8c;
+      font-size: 13px;
+    }
+    
+    /* 输入框样式 */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      font-family: inherit;
+    }
+    
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    
+    /* 评分组件样式 */
+    .rating-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .rating-stars {
+      display: flex;
+      gap: 10px;
+      margin-right: 15px;
+    }
+    
+    .rating-star {
+      font-size: 36px;
+      color: #d9d9d9;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    
+    .rating-star:hover,
+    .rating-star.active,
+    .rating-star:hover ~ .rating-star,
+    .rating-star.active ~ .rating-star {
+      color: #faad14;
+    }
+    
+    .rating-text {
+      font-size: 16px;
+      color: #8c8c8c;
+      min-width: 100px;
+    }
+    
+    /* 单选框和复选框组样式 */
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .radio-item,
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    input[type="radio"],
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    
+    /* 按钮样式 */
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #667eea;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: #764ba2;
+    }
+    
+    .btn:active {
+      transform: translateY(1px);
+    }
+    
+    .btn:disabled {
+      background-color: #d9d9d9;
+      cursor: not-allowed;
+    }
+    
+    .btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    /* 成功提示样式 */
+    .success-message {
+      background-color: #f6ffed;
+      border: 1px solid #b7eb8f;
+      color: #52c41a;
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+      display: none;
+    }
+    
+    .success-message.show {
+      display: block;
+    }
+    
+    .success-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+    
+    /* 问题类型标签样式 */
+    .issue-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background-color: #f0f0f0;
+      border-radius: 16px;
+      font-size: 14px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .issue-tag:hover,
+    .issue-tag.selected {
+      background-color: #667eea;
+      color: white;
+    }
+    
+    /* 反馈类型说明 */
+    .feedback-type-description {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #fafafa;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #595959;
+    }
+    
+    .feedback-type-description h4 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .feedback-type-description ul {
+      margin-left: 20px;
+    }
+    
+    .feedback-type-description li {
+      margin-bottom: 5px;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      
+      .header {
+        padding: 20px;
+      }
+      
+      .header h1 {
+        font-size: 24px;
+      }
+      
+      .form-container {
+        padding: 20px;
+      }
+      
+      .rating-star {
+        font-size: 28px;
+      }
+      
+      .radio-group,
+      .checkbox-group {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 20px;
+      }
+      
+      .form-group label {
+        font-size: 14px;
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select,
+      textarea {
+        font-size: 14px;
+        padding: 10px;
+      }
+      
+      .btn {
+        width: 100%;
+        padding: 12px;
+      }
+    }
+    
+    /* 动画效果 */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .form-group {
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    .form-group:nth-child(6) { animation-delay: 0.6s; }
+    .form-group:nth-child(7) { animation-delay: 0.7s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 成功提示消息 -->
+    <div class="success-message" id="successMessage">
+      <div class="success-icon">✓</div>
+      <h3>感谢您的反馈！</h3>
+      <p>我们将认真分析您的建议，持续优化系统。</p>
+    </div>
+    
+    <!-- 页面头部 -->
+    <div class="header">
+      <h1>用户反馈表单</h1>
+      <p>您的反馈对我们至关重要，帮助我们不断改进产品和服务体验。</p>
+    </div>
+    
+    <!-- 表单内容 --<form id="feedbackForm" class="form-container">
+      <!-- 反馈类型 --<div class="form-group">
+        <label for="feedbackType">反馈类型 <span style="color: #ff4d4f;">*</span></label>
+        <select id="feedbackType" name="feedbackType" required>
+          <option value="">请选择反馈类型</option>
+          <option value="bug">功能故障/错误</option>
+          <option value="suggestion">功能建议</option>
+          <option value="performance">性能问题</option>
+          <option value="ui">界面/体验优化</option>
+          <option value="content">内容错误</option>
+          <option value="other">其他问题</option>
+        </select>
+        <small>请选择最符合您反馈内容的类型。</small>
+      </div>
+      
+      <!-- 问题类型标签 (多选) --<div class="form-group">
+        <label>具体问题 <span style="color: #ff4d4f;">*</span></label>
+        <div class="issue-tags" id="issueTags">
+          <span class="issue-tag" data-value="login">登录/注册问题</span><span class="issue-tag" data-value="products">产品浏览问题</span><span class="issue-tag" data-value="cart">购物车问题</span><span class="issue-tag" data-value="checkout">结账/支付问题</span><span class="issue-tag" data-value="account">个人账户问题</span><span class="issue-tag" data-value="search">搜索功能问题</span><span class="issue-tag" data-value="mobile">移动端适配问题</span><span class="issue-tag" data-value="slow">页面加载慢</span><span class="issue-tag" data-value="other">其他问题</span>
+        </div>
+        <input type="hidden" id="selectedIssues" name="selectedIssues" required>
+        <small>请选择您遇到的具体问题，可多选。</small>
+      </div>
+      
+      <!-- 评分组件 --<div class="form-group">
+        <label>整体满意度评分 <span style="color: #ff4d4f;">*</span></label>
+        <div class="rating-container">
+          <div class="rating-stars" id="ratingStars">
+            <span class="rating-star" data-rating="1">★</span>
+            <span class="rating-star" data-rating="2">★</span>
+            <span class="rating-star" data-rating="3">★</span>
+            <span class="rating-star" data-rating="4">★</span>
+            <span class="rating-star" data-rating="5">★</span>
+          </div>
+          <span class="rating-text" id="ratingText">请选择评分</span>
+        </div>
+        <input type="hidden" id="rating" name="rating" required>
+        <small>5分表示非常满意，1分表示非常不满意。</small>
+      </div>
+      
+      <!-- 问题描述 --<div class="form-group">
+        <label for="description">问题描述 <span style="color: #ff4d4f;">*</span></label>
+        <textarea id="description" name="description" placeholder="请详细描述您遇到的问题或建议..." required></textarea>
+        <small>请尽可能详细地描述，包括问题发生的步骤、出现的错误信息等，以便我们更好地解决。</small>
+      </div>
+      
+      <!-- 联系方式 --<div class="form-group">
+        <label for="contactInfo">联系方式 <span style="color: #ff4d4f;">*</span></label>
+        <input type="text" id="contactMethod" name="contactMethod" placeholder="邮箱/手机号" required>
+        <small>请留下您的联系方式，以便我们在需要时与您进一步沟通。</small>
+      </div>
+      
+      <!-- 补充信息 --<div class="form-group">
+        <label for="browserInfo">浏览器信息</label>
+        <input type="text" id="browserInfo" name="browserInfo" readonly>
+        <small>系统自动收集，帮助我们排查问题。</small>
+      </div>
+      
+      <!-- 复选框组：是否希望收到回复 --<div class="form-group">
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="receiveReply" name="receiveReply" checked>
+            <label for="receiveReply">我希望收到关于此反馈的处理结果</label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 提交按钮 --<div class="btn-container">
+        <button type="submit" class="btn" id="submitBtn">提交反馈</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    // 初始化页面
+    document.addEventListener('DOMContentLoaded', function() {
+      // 设置浏览器信息
+      setBrowserInfo();
+      
+      // 初始化评分组件
+      initRatingComponent();
+      
+      // 初始化问题标签组件
+      initIssueTags();
+      
+      // 初始化表单验证和提交
+      initFormSubmit();
+    });
+    
+    // 设置浏览器信息
+    function setBrowserInfo() {
+      const browserInfo = navigator.userAgent;
+      document.getElementById('browserInfo').value = browserInfo;
+    }
+    
+    // 初始化评分组件
+    function initRatingComponent() {
+      const stars = document.querySelectorAll('.rating-star');
+      const ratingText = document.getElementById('ratingText');
+      const ratingInput = document.getElementById('rating');
+      
+      const ratingTexts = {
+        1: '非常不满意',
+        2: '不满意',
+        3: '一般',
+        4: '满意',
+        5: '非常满意'
+      };
+      
+      stars.forEach(star => {
+        star.addEventListener('click', function() {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          setRating(rating);
+        });
+        
+        star.addEventListener('mouseenter', function() {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          highlightStars(rating);
+        });
+      });
+      
+      document.querySelector('.rating-stars').addEventListener('mouseleave', function() {
+        const currentRating = ratingInput.value;
+        if (currentRating) {
+          setRating(currentRating);
+        } else {
+          resetStars();
+        }
+      });
+      
+      function highlightStars(rating) {
+        stars.forEach(star => {
+          const starRating = parseInt(star.getAttribute('data-rating'));
+          if (starRating <= rating) {
+            star.classList.add('active');
+          } else {
+            star.classList.remove('active');
+          }
+        });
+      }
+      
+      function setRating(rating) {
+        ratingInput.value = rating;
+        ratingText.textContent = ratingTexts[rating];
+        highlightStars(rating);
+      }
+      
+      function resetStars() {
+        stars.forEach(star => star.classList.remove('active'));
+        ratingText.textContent = '请选择评分';
+      }
+    }
+    
+    // 初始化问题标签组件
+    function initIssueTags() {
+      const tags = document.querySelectorAll('.issue-tag');
+      const selectedIssuesInput = document.getElementById('selectedIssues');
+      const selectedTags = [];
+      
+      tags.forEach(tag => {
+        tag.addEventListener('click', function() {
+          const value = this.getAttribute('data-value');
+          
+          if (this.classList.contains('selected')) {
+            // 取消选择
+            this.classList.remove('selected');
+            const index = selectedTags.indexOf(value);
+            if (index > -1) {
+              selectedTags.splice(index, 1);
+            }
+          } else {
+            // 选择
+            this.classList.add('selected');
+            if (!selectedTags.includes(value)) {
+              selectedTags.push(value);
+            }
+          }
+          
+          // 更新隐藏输入框
+          selectedIssuesInput.value = selectedTags.join(',');
+        });
+      });
+    }
+    
+    // 初始化表单提交
+    function initFormSubmit() {
+      const form = document.getElementById('feedbackForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const successMessage = document.getElementById('successMessage');
+      
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // 表单验证
+        const feedbackType = document.getElementById('feedbackType').value;
+        const selectedIssues = document.getElementById('selectedIssues').value;
+        const rating = document.getElementById('rating').value;
+        const description = document.getElementById('description').value;
+        const contactMethod = document.getElementById('contactMethod').value;
+        
+        if (!feedbackType) {
+          alert('请选择反馈类型');
+          return;
+        }
+        
+        if (!selectedIssues) {
+          alert('请选择具体问题');
+          return;
+        }
+        
+        if (!rating) {
+          alert('请选择满意度评分');
+          return;
+        }
+        
+        if (!description.trim()) {
+          alert('请填写问题描述');
+          return;
+        }
+        
+        if (!contactMethod.trim()) {
+          alert('请填写联系方式');
+          return;
+        }
+        
+        // 模拟表单提交
+        submitBtn.disabled = true;
+        submitBtn.textContent = '提交中...';
+        
+        // 构建表单数据
+        const formData = {
+          feedbackType,
+          selectedIssues: selectedIssues.split(','),
+          rating,
+          description,
+          contactMethod,
+          browserInfo: document.getElementById('browserInfo').value,
+          receiveReply: document.getElementById('receiveReply').checked,
+          timestamp: new Date().toISOString()
+        };
+        
+        // 模拟API调用
+        setTimeout(function() {
+          console.log('反馈数据:', formData);
+          
+          // 显示成功消息
+          successMessage.classList.add('show');
+          form.style.display = 'none';
+          
+          // 重置按钮状态
+          submitBtn.disabled = false;
+          submitBtn.textContent = '提交反馈';
+          
+          // 记录用户反馈数据
+          logFeedbackData(formData);
+        }, 1500);
+      });
+    }
+    
+    // 记录用户反馈数据
+    function logFeedbackData(data) {
+      // 在实际应用中，这里会发送数据到后端服务器
+      // 这里模拟将数据保存到localStorage
+      try {
+        const feedbacks = JSON.parse(localStorage.getItem('userFeedbacks') || '[]');
+        feedbacks.push(data);
+        localStorage.setItem('userFeedbacks', JSON.stringify(feedbacks));
+      } catch (e) {
+        console.error('保存反馈数据失败:', e);
+      }
+    }
+    
+    // 添加表单验证功能
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+    
+    function validatePhone(phone) {
+      const re = /^1[3-9]\d{9}$/;
+      return re.test(phone);
+    }
+    
+    // 为联系方式字段添加验证
+    document.getElementById('contactMethod').addEventListener('blur', function() {
+      const contactMethod = this.value.trim();
+      if (contactMethod && !validateEmail(contactMethod) && !validatePhone(contactMethod)) {
+        alert('请输入有效的邮箱或手机号码');
+        this.focus();
+      }
+    });
+  </script>
+</body>
+</html>
